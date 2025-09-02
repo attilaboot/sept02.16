@@ -593,7 +593,7 @@ const Dashboard = () => {
         <div className="text-center mb-8">
           <Link 
             to="/new-work-order" 
-            className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-6 px-12 rounded-lg shadow-lg text-xl transition-all duration-200 transform hover:scale-105"
+            className="inline-block bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-6 px-12 rounded-lg shadow-lg text-xl transition-all duration-200 transform hover:scale-105"
           >
             ➕ Új Munkalap
           </Link>
