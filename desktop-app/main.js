@@ -326,7 +326,8 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
       enableRemoteModule: false,
-      webSecurity: true
+      webSecurity: false, // Desktop alkalmazásban
+      sandbox: false
     },
     title: 'Turbó Szerviz Kezelő',
     icon: path.join(__dirname, 'assets', 'icon.png'), // ha van icon
