@@ -1,0 +1,272 @@
+{
+  "version": "1.0",
+  "worksheetConfig": {
+    "title": "Turbó Szerviz Munkalap",
+    "workNumberDisplay": {
+      "show": true,
+      "position": "top-left",
+      "format": "MUNKA-#{number}",
+      "backgroundColor": "#3B82F6",
+      "textColor": "#FFFFFF",
+      "fontSize": "16",
+      "padding": "12",
+      "borderRadius": "8",
+      "borderWidth": "2",
+      "borderColor": "#1E40AF"
+    },
+    "sections": [
+      {
+        "id": "client_info",
+        "title": "Ügyfél információk",
+        "icon": "👤",
+        "fields": [
+          {
+            "id": "client_name",
+            "label": "Ügyfél neve",
+            "type": "text",
+            "required": true,
+            "order": 1,
+            "width": "full"
+          },
+          {
+            "id": "client_phone", 
+            "label": "Telefonszám",
+            "type": "tel",
+            "required": true,
+            "order": 2,
+            "width": "half"
+          },
+          {
+            "id": "client_email",
+            "label": "E-mail cím", 
+            "type": "email",
+            "required": false,
+            "order": 3,
+            "width": "half"
+          },
+          {
+            "id": "client_address",
+            "label": "Cím",
+            "type": "textarea",
+            "required": false,
+            "order": 4,
+            "width": "full"
+          }
+        ]
+      },
+      {
+        "id": "vehicle_info",
+        "title": "Jármű adatok",
+        "icon": "🚗",
+        "fields": [
+          {
+            "id": "car_make",
+            "label": "Autó márka",
+            "type": "dropdown",
+            "required": true,
+            "order": 1,
+            "width": "half",
+            "options": ["BMW", "Mercedes-Benz", "Audi", "Volkswagen", "Ford", "Peugeot", "Renault", "Opel", "Citroën", "Škoda", "Toyota", "Nissan"],
+            "allowCustom": true
+          },
+          {
+            "id": "car_model",
+            "label": "Típus/Modell",
+            "type": "text",
+            "required": true,
+            "order": 2,
+            "width": "half"
+          },
+          {
+            "id": "car_year",
+            "label": "Évjárat",
+            "type": "number",
+            "required": false,
+            "order": 3,
+            "width": "quarter",
+            "min": 1990,
+            "max": 2025
+          },
+          {
+            "id": "license_plate",
+            "label": "Rendszám",
+            "type": "text",
+            "required": false,
+            "order": 4,
+            "width": "quarter"
+          },
+          {
+            "id": "engine_code",
+            "label": "Motorkód",
+            "type": "text",
+            "required": false,
+            "order": 5,
+            "width": "half"
+          },
+          {
+            "id": "mileage",
+            "label": "Kilométeróra állás",
+            "type": "number",
+            "required": false,
+            "order": 6,
+            "width": "half"
+          }
+        ]
+      },
+      {
+        "id": "turbo_info",
+        "title": "Turbó információk",
+        "icon": "🔧",
+        "fields": [
+          {
+            "id": "turbo_code",
+            "label": "Turbó kód",
+            "type": "text",
+            "required": true,
+            "order": 1,
+            "width": "half"
+          },
+          {
+            "id": "received_date",
+            "label": "Beérkezés dátuma",
+            "type": "date",
+            "required": true,
+            "order": 2,
+            "width": "half"
+          },
+          {
+            "id": "problem_description",
+            "label": "Hibaleírás",
+            "type": "textarea",
+            "required": false,
+            "order": 3,
+            "width": "full",
+            "rows": 3
+          },
+          {
+            "id": "general_notes",
+            "label": "Megjegyzések",
+            "type": "textarea",
+            "required": false,
+            "order": 4,
+            "width": "full",
+            "rows": 2
+          }
+        ]
+      },
+      {
+        "id": "pricing",
+        "title": "Árazás",
+        "icon": "💰",
+        "fields": [
+          {
+            "id": "cleaning_price",
+            "label": "Tisztítás ára",
+            "type": "number",
+            "required": false,
+            "order": 1,
+            "width": "third",
+            "defaultValue": 170,
+            "min": 0,
+            "suffix": "LEI"
+          },
+          {
+            "id": "reconditioning_price",
+            "label": "Felújítás ára",
+            "type": "number",
+            "required": false,
+            "order": 2,
+            "width": "third", 
+            "defaultValue": 170,
+            "min": 0,
+            "suffix": "LEI"
+          },
+          {
+            "id": "turbo_price",
+            "label": "Turbó ára",
+            "type": "number",
+            "required": false,
+            "order": 3,
+            "width": "third",
+            "defaultValue": 240,
+            "min": 0,
+            "suffix": "LEI"
+          }
+        ]
+      }
+    ]
+  },
+  "fieldTypes": [
+    {
+      "id": "text",
+      "label": "Szöveg",
+      "icon": "📝",
+      "properties": ["label", "required", "placeholder", "maxLength"]
+    },
+    {
+      "id": "textarea", 
+      "label": "Hosszú szöveg",
+      "icon": "📄",
+      "properties": ["label", "required", "placeholder", "rows", "maxLength"]
+    },
+    {
+      "id": "number",
+      "label": "Szám",
+      "icon": "🔢",
+      "properties": ["label", "required", "min", "max", "step", "defaultValue", "prefix", "suffix"]
+    },
+    {
+      "id": "email",
+      "label": "E-mail",
+      "icon": "📧",
+      "properties": ["label", "required", "placeholder"]
+    },
+    {
+      "id": "tel",
+      "label": "Telefon",
+      "icon": "📞",
+      "properties": ["label", "required", "placeholder"]
+    },
+    {
+      "id": "date",
+      "label": "Dátum",
+      "icon": "📅",
+      "properties": ["label", "required", "min", "max", "defaultValue"]
+    },
+    {
+      "id": "dropdown",
+      "label": "Lenyíló lista",
+      "icon": "📋",
+      "properties": ["label", "required", "options", "allowCustom", "placeholder"]
+    },
+    {
+      "id": "checkbox",
+      "label": "Jelölőnégyzet",
+      "icon": "☑️",
+      "properties": ["label", "defaultValue"]
+    },
+    {
+      "id": "radio",
+      "label": "Rádiógomb",
+      "icon": "🔘",
+      "properties": ["label", "required", "options"]
+    }
+  ],
+  "templates": [
+    {
+      "id": "basic_turbo",
+      "name": "Alapvető turbó szerviz",
+      "description": "Minimális mezők turbó javításhoz"
+    },
+    {
+      "id": "detailed_turbo", 
+      "name": "Részletes turbó szerviz",
+      "description": "Teljes adatgyűjtés minden részlettel"
+    },
+    {
+      "id": "quick_diagnosis",
+      "name": "Gyors diagnosztika",
+      "description": "Gyors ellenőrzéshez szükséges mezők"
+    }
+  ]
+}
