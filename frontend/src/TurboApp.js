@@ -135,6 +135,104 @@ apiClient.interceptors.response.use(
   }
 );
 
+// Enhanced data saving with offline support
+const saveToOffline = async (dataType, data) => {
+  if (!window.offlineDB.db) {
+    await window.offlineDB.init();
+  }
+  
+  const storeName = dataType === 'client' ? 'clients' : 'workOrders';
+  await window.offlineDB.save(storeName, { ...data, offline: true, savedAt: new Date().toISOString() });
+  
+  // Also save to localStorage as backup
+  const existingData = JSON.parse(localStorage.getItem(storeName) || '[]');
+  const updatedData = existingData.filter(item => item.id !== data.id);
+  updatedData.push(data);
+  localStorage.setItem(storeName, JSON.stringify(updatedData));
+};
+
+// Load offline data
+const loadOfflineData = async (dataType) => {
+  if (!window.offlineDB.db) {
+    await window.offlineDB.init();
+  }
+  
+  const storeName = dataType === 'client' ? 'clients' : 'workOrders';
+  try {
+    const data = await window.offlineDB.getAll(storeName);
+    return data || [];
+  } catch (error) {
+    // Fallback to localStorage
+    return JSON.parse(localStorage.getItem(storeName) || '[]');
+  }
+};
+
+// Sync offline data when online
+const syncOfflineData = async () => {
+  if (!navigator.onLine) return;
+  
+  try {
+    const offlineClients = await loadOfflineData('client');
+    const offlineWorkOrders = await loadOfflineData('workOrder');
+    
+    // Sync clients
+    for (const client of offlineClients.filter(c => c.offline)) {
+      try {
+        await axios.post(`${API}/clients`, client);
+        // Remove offline flag after successful sync
+        client.offline = false;
+        await saveToOffline('client', client);
+      } catch (error) {
+        console.log('Failed to sync client:', client.id);
+      }
+    }
+    
+    // Sync work orders
+    for (const workOrder of offlineWorkOrders.filter(wo => wo.offline)) {
+      try {
+        await axios.post(`${API}/work-orders`, workOrder);
+        // Remove offline flag after successful sync
+        workOrder.offline = false;
+        await saveToOffline('workOrder', workOrder);
+      } catch (error) {
+        console.log('Failed to sync work order:', workOrder.id);
+      }
+    }
+  } catch (error) {
+    console.log('Sync failed:', error);
+  }
+};
+
+// Initialize offline database and sync when online
+useEffect(() => {
+  const initOfflineDB = async () => {
+    try {
+      await window.offlineDB.init();
+      console.log('Offline database initialized');
+      
+      // Sync when coming online
+      if (navigator.onLine) {
+        syncOfflineData();
+      }
+    } catch (error) {
+      console.error('Failed to initialize offline database:', error);
+    }
+  };
+  
+  initOfflineDB();
+  
+  // Listen for online/offline events
+  window.addEventListener('online', syncOfflineData);
+  window.addEventListener('offline', () => {
+    console.log('App is now offline');
+  });
+  
+  return () => {
+    window.removeEventListener('online', syncOfflineData);
+    window.removeEventListener('offline', () => {});
+  };
+}, []);
+
 // Application Configuration
 const getAppConfig = () => {
   const defaultConfig = {
