@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./App.css";
+import WorksheetEditor from "./components/WorksheetEditor";
+import AdminPanel from "./components/AdminPanel";
+import TurboInventoryManager from "./components/TurboInventoryManager";
+import TurboInventorySettings from "./components/TurboInventorySettings";
+import DashboardMain from "./components/DashboardMain";
+import MainPage from "./components/MainPage";
 
 // PWA Service Worker Registration
 if ('serviceWorker' in navigator) {
