@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turbó Szerviz Kezelő - Desktop Telepítés</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 50px auto; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container { 
+            background: rgba(255,255,255,0.1); 
+            padding: 40px; 
+            border-radius: 20px; 
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        h1 { text-align: center; margin-bottom: 30px; font-size: 2.5em; }
+        .method { 
+            background: rgba(255,255,255,0.1); 
+            padding: 25px; 
+            margin: 20px 0; 
+            border-radius: 15px; 
+            border-left: 5px solid #4CAF50;
+        }
+        .install-btn { 
+            background: linear-gradient(45deg, #4CAF50, #45a049); 
+            color: white; 
+            padding: 15px 30px; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 18px; 
+            cursor: pointer; 
+            margin: 10px; 
+            transition: transform 0.2s;
+        }
+        .install-btn:hover { transform: scale(1.05); }
+        .step { margin: 10px 0; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px; }
+        .icon { font-size: 2em; margin-right: 15px; }
+        .warning { background: rgba(255,193,7,0.2); border-left: 5px solid #FFC107; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Turbó Szerviz Kezelő</h1>
+        <h2 style="text-align: center; margin-bottom: 40px;">Desktop Alkalmazás Telepítése</h2>
+        
+        <div class="method">
+            <h3><span class="icon">🌐</span>MÓDSZER 1 - Chrome Desktop Shortcut</h3>
+            <div class="step">1. <strong>Nyisd meg:</strong> https://car-registry-3.preview.emergentagent.com</div>
+            <div class="step">2. <strong>Chrome menü</strong> (⋮) → <strong>"More tools"</strong> → <strong>"Create shortcut"</strong></div>
+            <div class="step">3. <strong>Pipáld be:</strong> "Open as window" ✅</div>
+            <div class="step">4. <strong>Create</strong> → Megjelenik a Desktop-on!</div>
+            <button class="install-btn" onclick="window.open('https://car-registry-3.preview.emergentagent.com', '_blank')">
+                🚀 Megnyitás Chromban
+            </button>
+        </div>
+        
+        <div class="method">
+            <h3><span class="icon">💻</span>MÓDSZER 2 - Edge App</h3>
+            <div class="step">1. <strong>Microsoft Edge</strong> böngészőben nyisd meg az oldalt</div>
+            <div class="step">2. <strong>Beállítások menü</strong> (⋯) → <strong>"Apps"</strong> → <strong>"Install this site as an app"</strong></div>
+            <div class="step">3. <strong>Install</strong> → Natív app-ként működik!</div>
+        </div>
+        
+        <div class="method">
+            <h3><span class="icon">📁</span>MÓDSZER 3 - Manual Desktop Link</h3>
+            <div class="step">1. <strong>Jobb klikk</strong> a Desktop-on → <strong>"New"</strong> → <strong>"Shortcut"</strong></div>
+            <div class="step">2. <strong>Location:</strong> <code>chrome.exe --app=https://car-registry-3.preview.emergentagent.com</code></div>
+            <div class="step">3. <strong>Name:</strong> "Turbó Szerviz Kezelő"</div>
+            <div class="step">4. <strong>Finish</strong> → Desktop shortcut kész!</div>
+        </div>
+        
+        <div class="method warning">
+            <h3><span class="icon">⚠️</span>FONTOS TUDNIVALÓK</h3>
+            <div class="step">✅ <strong>Offline működés:</strong> Minden adat helyben tárolódik (böngésző adatbázis)</div>
+            <div class="step">✅ <strong>Automatikus mentés:</strong> Nincs szükség külön mentésre</div>
+            <div class="step">✅ <strong>Adatok megmaradnak:</strong> Újraindításkor is megvannak</div>
+            <div class="step">⚠️ <strong>Böngésző adatok törlése:</strong> Ez törli az alkalmazás adatait is!</div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <button class="install-btn" onclick="window.open('https://car-registry-3.preview.emergentagent.com', '_blank')" style="font-size: 20px; padding: 20px 40px;">
+                🔧 TURBÓ SZERVIZ INDÍTÁSA
+            </button>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px; opacity: 0.8;">
+            <p>Verzió 1.0.0 | Offline Desktop App | 2025-09-02</p>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-detect browser and show relevant instructions
+        const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        const isEdge = /Edg/.test(navigator.userAgent);
+        
+        if (isChrome) {
+            console.log('Chrome detected - Method 1 recommended');
+        } else if (isEdge) {
+            console.log('Edge detected - Method 2 recommended');
+        }
+    </script>
+</body>
+</html>
