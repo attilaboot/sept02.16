@@ -1,14 +1,57 @@
 {
-  "name": "desktop-app",
+  "name": "turbo-service-desktop",
+  "productName": "Turbó Szerviz Kezelő",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Desktop alkalmazás turbófeltöltő szervizeknek",
+  "main": "main.js",
+  "homepage": "./",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "electron": "electron .",
+    "electron-dev": "NODE_ENV=development electron .",
+    "build": "electron-builder",
+    "build-win": "electron-builder --win",
+    "dist": "npm run build",
+    "pack": "electron-builder --dir",
+    "start": "electron .",
+    "start-react": "cd ../frontend && npm start",
+    "postinstall": "electron-builder install-app-deps"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "build": {
+    "appId": "com.turbo-service.app",
+    "productName": "Turbó Szerviz Kezelő",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "src/**/*",
+      "public/**/*",
+      "node_modules/**/*",
+      "!node_modules/.cache/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Turbó Szerviz Kezelő"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  },
+  "keywords": ["turbo", "service", "desktop", "repair", "management"],
+  "author": "Turbó Szerviz",
+  "license": "MIT",
   "devDependencies": {
     "cors": "^2.8.5",
     "electron": "^37.4.0",
