@@ -6,13 +6,13 @@
   "main": "main.js",
   "homepage": "./",
   "scripts": {
-    "electron": "electron .",
-    "electron-dev": "NODE_ENV=development electron .",
+    "electron": "electron . --no-sandbox",
+    "electron-dev": "NODE_ENV=development electron . --no-sandbox",
     "build": "electron-builder",
     "build-win": "electron-builder --win",
     "dist": "npm run build",
     "pack": "electron-builder --dir",
-    "start": "electron .",
+    "start": "electron . --no-sandbox",
     "start-react": "cd ../frontend && npm start",
     "postinstall": "electron-builder install-app-deps"
   },
