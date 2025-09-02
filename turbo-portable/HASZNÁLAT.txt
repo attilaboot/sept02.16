@@ -1,0 +1,50 @@
+📋 TURBÓ SZERVIZ KEZELŐ - GYORS ÚTMUTATÓ
+========================================
+
+🚀 ELSŐ LÉPÉSEK:
+1. Dupla klikk: "Turbo-Szerviz-Portable.exe"
+2. Várj 10-15 másodpercet az indulásra
+3. Megnyílik az alkalmazás ablaka
+
+🏠 FŐMENÜ:
+- Dashboard: Statisztikák és áttekintés
+- Ügyfelek: Ügyfél adatbázis kezelése
+- Munkalapok: Turbó javítási feladatok
+- Raktár: Alkatrészek és készletek
+- Beállítások: Testreszabás és konfigurálás
+
+👥 ÜGYFÉL HOZZÁADÁSA:
+1. Menj az "Ügyfelek" menüpontra
+2. Kattints "Új ügyfél" gombra
+3. Töltsd ki: név, telefon, cím, stb.
+4. Mentés gombra kattints
+
+📋 ÚJ MUNKALAP KÉSZÍTÉSE:
+1. Kattints "Új Munkalap" gombra
+2. Válaszd ki az ügyfelet
+3. Add meg a turbó kódot (pl: 5490-970-0071)
+4. Töltsd ki az autó adatokat
+5. Válaszd ki a szükséges alkatrészeket
+6. Állítsd be az árakat
+7. Mentés és véglegesítés
+
+💰 ÁRAZÁS:
+- Tisztítás: alapértelmezés 170 LEI
+- Felújítás: alapértelmezés 170 LEI  
+- Turbó: alapértelmezés 240 LEI
+- Ezek módosíthatók minden munkalapnál
+
+📄 JELENTÉSEK:
+- Minden munkalapról PDF generálható
+- Nyomtatható számlák és árajánlatok
+- HTML formátumban is elérhető
+
+🔧 PROBLÉMAMEGOLDÁS:
+- Ha nem indul el: Jobb klikk → "Futtatás rendszergazdaként" 
+- Windows Defender blokkolja: "További információ" → "Futtatás mindenképpen"
+- Lassan indul: Ez normális az első alkalommal
+
+💾 ADATMENTÉS:
+- Adatok automatikusan mentődnek helyi adatbázisba
+- Nincs szükség külön mentésre
+- Adatok megmaradnak az alkalmazás újraindítása után
