@@ -15,6 +15,11 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js')
       .then((registration) => {
         console.log('SW registered: ', registration);
+        // Check if PWA can be installed
+        window.addEventListener('beforeinstallprompt', (e) => {
+          console.log('PWA can be installed');
+          window.deferredPrompt = e;
+        });
       })
       .catch((registrationError) => {
         console.log('SW registration failed: ', registrationError);
