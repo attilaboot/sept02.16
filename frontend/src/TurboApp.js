@@ -1,6 +1,96 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+
+// PWA Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then((registration) => {
+        console.log('SW registered: ', registration);
+      })
+      .catch((registrationError) => {
+        console.log('SW registration failed: ', registrationError);
+      });
+  });
+}
+
+// Offline Database Manager
+class OfflineDB {
+  constructor() {
+    this.dbName = 'TurboSzervizDB';
+    this.version = 1;
+    this.db = null;
+  }
+
+  async init() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(this.dbName, this.version);
+      
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => {
+        this.db = request.result;
+        resolve(this.db);
+      };
+      
+      request.onupgradeneeded = (event) => {
+        const db = event.target.result;
+        
+        // Create object stores
+        if (!db.objectStoreNames.contains('clients')) {
+          const clientStore = db.createObjectStore('clients', { keyPath: 'id' });
+          clientStore.createIndex('name', 'name', { unique: false });
+        }
+        
+        if (!db.objectStoreNames.contains('workOrders')) {
+          const workOrderStore = db.createObjectStore('workOrders', { keyPath: 'id' });
+          workOrderStore.createIndex('work_number', 'work_number', { unique: true });
+        }
+        
+        if (!db.objectStoreNames.contains('settings')) {
+          db.createObjectStore('settings', { keyPath: 'key' });
+        }
+      };
+    });
+  }
+
+  async save(storeName, data) {
+    const transaction = this.db.transaction([storeName], 'readwrite');
+    const store = transaction.objectStore(storeName);
+    return store.put(data);
+  }
+
+  async get(storeName, id) {
+    const transaction = this.db.transaction([storeName], 'readonly');
+    const store = transaction.objectStore(storeName);
+    return new Promise((resolve, reject) => {
+      const request = store.get(id);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async getAll(storeName) {
+    const transaction = this.db.transaction([storeName], 'readonly');
+    const store = transaction.objectStore(storeName);
+    return new Promise((resolve, reject) => {
+      const request = store.getAll();
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async delete(storeName, id) {
+    const transaction = this.db.transaction([storeName], 'readwrite');
+    const store = transaction.objectStore(storeName);
+    return store.delete(id);
+  }
+}
+
+// Global offline database instance
+window.offlineDB = new OfflineDB();
+
+// Enhanced API client with offline support
 import "./App.css";
 import WorksheetEditor from "./components/WorksheetEditor";
 import AdminPanel from "./components/AdminPanel";
@@ -11,6 +101,40 @@ import MainPage from "./components/MainPage";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
+
+// Create axios instance with offline support
+const apiClient = axios.create({
+  baseURL: API,
+  timeout: 5000
+});
+
+// Add response interceptor for offline handling
+apiClient.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (!navigator.onLine || error.code === 'NETWORK_ERROR') {
+      // Handle offline mode
+      const config = error.config;
+      const url = config.url;
+      
+      if (config.method === 'get') {
+        // Try to get data from offline storage
+        try {
+          let data = [];
+          if (url.includes('/clients')) {
+            data = await window.offlineDB.getAll('clients');
+          } else if (url.includes('/work-orders')) {
+            data = await window.offlineDB.getAll('workOrders');
+          }
+          return Promise.resolve({ data, offline: true });
+        } catch (offlineError) {
+          return Promise.resolve({ data: [], offline: true });
+        }
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 // Application Configuration
 const getAppConfig = () => {
