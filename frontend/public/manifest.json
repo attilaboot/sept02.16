@@ -1,0 +1,54 @@
+{
+  "name": "Turbó Szerviz Kezelő",
+  "short_name": "TurboSzerviz",
+  "description": "Turbófeltöltő szerviz kezelő alkalmazás",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "categories": ["business", "productivity"],
+  "lang": "hu",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Új Munkalap",
+      "short_name": "Új Munka",
+      "description": "Új munkalap létrehozása",
+      "url": "/new-work-order",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Ügyfelek",
+      "short_name": "Ügyfelek",
+      "description": "Ügyfél adatbázis kezelése",
+      "url": "/clients",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false
+}
