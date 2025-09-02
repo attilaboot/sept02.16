@@ -523,7 +523,7 @@ const Dashboard = () => {
         </div>
 
         {/* Recent Work Orders */}
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold text-gray-800">Legújabb munkalapok</h2>
             <Link to="/work-orders" className="text-blue-500 hover:text-blue-600 font-medium">
@@ -585,11 +585,18 @@ const Dashboard = () => {
           {workOrders.length === 0 && (
             <div className="text-center py-8 text-gray-500">
               <p>Még nincsenek munkalapok</p>
-              <Link to="/new-work-order" className="text-blue-500 hover:text-blue-600 font-medium">
-                Hozz létre egy újat →
-              </Link>
             </div>
           )}
+        </div>
+
+        {/* Big New Work Order Button */}
+        <div className="text-center mb-8">
+          <Link 
+            to="/new-work-order" 
+            className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-6 px-12 rounded-lg shadow-lg text-xl transition-all duration-200 transform hover:scale-105"
+          >
+            ➕ Új Munkalap
+          </Link>
         </div>
       </div>
     </div>
