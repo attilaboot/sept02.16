@@ -62,6 +62,7 @@
     "cors": "^2.8.5",
     "electron": "^37.4.0",
     "electron-builder": "^26.0.12",
+    "react-scripts": "^5.0.1",
     "sqlite3": "^5.1.7"
   },
   "dependencies": {
@@ -73,7 +74,6 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.8.2",
-    "react-scripts": "^5.0.1",
     "tailwindcss": "^4.1.12"
   }
 }
