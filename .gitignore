@@ -80,3 +80,9 @@ agenthub/agents/youtube/db
 android-sdk/ desktop-app/node_modules/electron/dist/electron
 desktop-app/node_modules/electron/dist/electron
 desktop-app/dist/win-arm64-unpacked/electron.exe
+Turbo-Szerviz-Desktop-App.tar.gz
+desktop-app/Turbo-Szerviz-Desktop-App.tar.gz
+desktop-app/dist/win-arm64-unpacked/resources/app.asar
+desktop-app/dist/win-arm64-unpacked/Turbó
+Szerviz
+Kezelő.exe
